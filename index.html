@@ -22,6 +22,143 @@
   <title>AnyLang Translator - Free Online Translation Tool</title>
   </head>
   <body>
-    ...existing code...
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <ion-icon name="language-outline"></ion-icon>
+          <h1>AnyLang Translator</h1>
+        </div>
+        <div class="header-actions">
+          <button class="copy-btn" id="copy-btn" title="Copy translation">
+            <ion-icon name="copy-outline"></ion-icon>
+          </button>
+          <div class="mode-toggle">
+            <input type="checkbox" id="dark-mode-btn" class="toggle-checkbox">
+            <label for="dark-mode-btn" class="switch">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="card input-wrapper">
+          <div class="card-header">
+            <div class="input-language-display">
+              <span class="heading">From:</span>
+              <div class="language-badge">
+                <ion-icon name="globe-outline"></ion-icon>
+                <span>English</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" id="clear-btn" title="Clear text">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+              <label class="action-btn file-upload" title="Upload document">
+                <ion-icon name="document-outline"></ion-icon>
+                <input type="file" id="upload-document" accept=".txt,.pdf,.doc,.docx" hidden>
+              </label>
+            </div>
+          </div>
+          
+          <div class="text-area">
+            <textarea
+              id="input-text"
+              placeholder="Enter English text to translate..."
+              maxlength="5000"
+            ></textarea>
+            <div class="text-area-footer">
+              <div class="chars">
+                <span id="input-chars">0</span> / 5000
+              </div>
+              <div class="text-actions">
+                <button class="microphone-btn" id="mic-btn" title="Voice input (English)">
+                  <ion-icon name="mic-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="center">
+          <div class="translate-button-container">
+            <button class="translate-btn" id="translate-btn">
+              <img src="images/favicon.png" alt="Mascot" class="mascot-icon" style="width:32px;height:32px;margin-right:8px;vertical-align:middle;">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+              <span>Translate</span>
+            </button>
+            <div id="confetti-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></div>
+          </div>
+        </div>
+
+        <div class="card output-wrapper">
+          <div class="card-header">
+            <div class="to">
+              <span class="heading">To:</span>
+              <div class="dropdown-container" id="output-language">
+                <div class="dropdown-toggle">
+                  <ion-icon name="globe-outline"></ion-icon>
+                  <span class="selected" data-value="es">Spanish</span>
+                  <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <ul class="dropdown-menu">
+                  <!-- Languages will be populated by JavaScript -->
+                </ul>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" id="download-btn" title="Download translation">
+                <ion-icon name="download-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="text-area">
+            <textarea
+              id="output-text"
+              placeholder="Translation will appear here..."
+              readonly
+            ></textarea>
+            <div class="text-area-footer">
+              <div class="translation-info">
+                <span id="translation-status">Ready to translate</span>
+              </div>
+              <div class="text-actions">
+                <button class="speak-btn" id="speak-btn" title="Listen to translation">
+                  <ion-icon name="volume-high-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2024 English Language Translator. Built by Soujanya Shanbhag for CODEXINTERN</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-spinner">
+        <ion-icon name="sync-outline"></ion-icon>
+        <span>Translating...</span>
+      </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="js/languages.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
