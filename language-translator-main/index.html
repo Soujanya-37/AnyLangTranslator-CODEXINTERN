@@ -4,82 +4,159 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-    <meta name="description" content="Language Translator">
-    <meta name="keywords" content="language translator, translator">
+  <meta name="description" content="AnyLang Translator - Translate English text to 100+ languages instantly">
+  <meta name="keywords" content="AnyLang Translator, online translator, free translator, english translator">
     <link rel="icon" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script
       type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
     <script
       nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <link rel="stylesheet" href="style/style.css" />
-    <title>simple language translator</title>
+  <title>AnyLang Translator - Free Online Translation Tool</title>
   </head>
   <body>
-    <div class="container">
-      <div class="card input-wrapper">
-        <div class="from">
-          <span class="heading">From :</span>
-          <div class="dropdown-container" id="input-language">
-            <div class="dropdown-toggle">
-              <ion-icon name="globe-outline"></ion-icon>
-              <span class="selected" data-value="auto">Auto Detect</span>
-              <ion-icon name="chevron-down-outline"></ion-icon>
-            </div>
-            <ul class="dropdown-menu">
-              <li class="option active">DropDown Menu Item 1</li>
-              <li class="option">DropDown Menu Item 2</li>
-            </ul>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <ion-icon name="language-outline"></ion-icon>
+          <h1>AnyLang Translator</h1>
+        </div>
+        <div class="header-actions">
+          <button class="copy-btn" id="copy-btn" title="Copy translation">
+            <ion-icon name="copy-outline"></ion-icon>
+          </button>
+          <div class="mode-toggle">
+            <input type="checkbox" id="dark-mode-btn" class="toggle-checkbox">
+            <label for="dark-mode-btn" class="switch">
+              <span class="slider"></span>
+            </label>
           </div>
         </div>
-        <div class="text-area">
-          <textarea
-            id="input-text"
-            cols="30"
-            rows="10"
-            placeholder="Enter text"
-          ></textarea>
-          <div class="chars"><span id="input-chars">0</span> / 5000</div>
-        </div>
-       
       </div>
+    </header>
 
-      <div class="center">
-        <div class="swap-position">
-          <ion-icon name="swap-horizontal-outline"></ion-icon>
-        </div>
-      </div>
-
-      <div class="card output-wrapper">
-        <div class="to">
-          <span class="heading">To :</span>
-          <div class="dropdown-container" id="output-language">
-            <div class="dropdown-toggle">
-              <ion-icon name="globe-outline"></ion-icon>
-              <span class="selected" data-value="en">English</span>
-              <ion-icon name="chevron-down-outline"></ion-icon>
+    <main class="main">
+      <div class="container">
+        <div class="card input-wrapper">
+          <div class="card-header">
+            <div class="input-language-display">
+              <span class="heading">From:</span>
+              <div class="language-badge">
+                <ion-icon name="globe-outline"></ion-icon>
+                <span>English</span>
+              </div>
             </div>
-            <ul class="dropdown-menu">
-              <li class="option active">DropDown Menu Item 1</li>
-              <li class="option">DropDown Menu Item 2</li>
-            </ul>
+            <div class="card-actions">
+              <button class="action-btn" id="clear-btn" title="Clear text">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+              <label class="action-btn file-upload" title="Upload document">
+                <ion-icon name="document-outline"></ion-icon>
+                <input type="file" id="upload-document" accept=".txt,.pdf,.doc,.docx" hidden>
+              </label>
+            </div>
+          </div>
+          
+          <div class="text-area">
+            <textarea
+              id="input-text"
+              placeholder="Enter English text to translate..."
+              maxlength="5000"
+            ></textarea>
+            <div class="text-area-footer">
+              <div class="chars">
+                <span id="input-chars">0</span> / 5000
+              </div>
+              <div class="text-actions">
+                <button class="microphone-btn" id="mic-btn" title="Voice input (English)">
+                  <ion-icon name="mic-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <textarea
-          id="output-text"
-          cols="30"
-          rows="10"
-          placeholder="Translation"
-          disabled
-        ></textarea>
-        
+
+        <div class="center">
+          <div class="translate-button-container">
+            <button class="translate-btn" id="translate-btn">
+              <img src="images/favicon.png" alt="Mascot" class="mascot-icon" style="width:32px;height:32px;margin-right:8px;vertical-align:middle;">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+              <span>Translate</span>
+            </button>
+            <div id="confetti-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></div>
+          </div>
+        </div>
+
+        <div class="card output-wrapper">
+          <div class="card-header">
+            <div class="to">
+              <span class="heading">To:</span>
+              <div class="dropdown-container" id="output-language">
+                <div class="dropdown-toggle">
+                  <ion-icon name="globe-outline"></ion-icon>
+                  <span class="selected" data-value="es">Spanish</span>
+                  <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <ul class="dropdown-menu">
+                  <!-- Languages will be populated by JavaScript -->
+                </ul>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" id="download-btn" title="Download translation">
+                <ion-icon name="download-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="text-area">
+            <textarea
+              id="output-text"
+              placeholder="Translation will appear here..."
+              readonly
+            ></textarea>
+            <div class="text-area-footer">
+              <div class="translation-info">
+                <span id="translation-status">Ready to translate</span>
+              </div>
+              <div class="text-actions">
+                <button class="speak-btn" id="speak-btn" title="Listen to translation">
+                  <ion-icon name="volume-high-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2024 English Language Translator. Built by Soujanya Shanbhag for CODEXINTERN</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-spinner">
+        <ion-icon name="sync-outline"></ion-icon>
+        <span>Translating...</span>
       </div>
     </div>
-   
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container"></div>
 
     <script src="js/languages.js"></script>
     <script src="js/script.js"></script>
